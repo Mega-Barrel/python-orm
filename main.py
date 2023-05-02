@@ -17,7 +17,17 @@ engine = create_engine("sqlite:///database.db")
 # create table
 SQLModel.metadata.create_all(engine)
 
-with Session(engine) as session:
-    session.add(hero1)
-    session.add(hero2)
-    session.add(hero3)
+# Function to insert data
+def insert_data(data):
+    with Session(engine) as session:
+        session.add(data)
+        session.commit()
+
+def query_table(col, value):
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.col == value)
+        hero = session.exec(statement).first()
+        print(hero)
+        
+if __name__ == "__main__":
+    query_table(name, "Rusty-Man")

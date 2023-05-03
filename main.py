@@ -1,5 +1,5 @@
 from typing import Optional
-from sqlmodel import Field, Session, SQLModel, create_engine
+from sqlmodel import Field, Session, SQLModel, create_engine, select
 
 class Hero(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -23,11 +23,11 @@ def insert_data(data):
         session.add(data)
         session.commit()
 
-def query_table(col, value):
+def query_table(value):
     with Session(engine) as session:
-        statement = select(Hero).where(Hero.col == value)
+        statement = select(Hero).where(Hero.name == value)
         hero = session.exec(statement).first()
         print(hero)
         
 if __name__ == "__main__":
-    query_table(name, "Rusty-Man")
+    query_table("Deadpond")

@@ -1,4 +1,5 @@
 
+-- Table Schema
 CREATE TABLE "hero" (
     "id" INTEGER,
     "name" TEXT NOT NULL,
@@ -6,3 +7,22 @@ CREATE TABLE "hero" (
     "age" INTEGER,
     PRIMARY KEY ("id")
 );
+
+-- Insert data into table
+INSERT INTO "hero" (
+    "name",
+    "secret_name"
+) VALUES (
+    "Deadpond",
+    "Dive Wilson"
+);
+
+-- Read Data from Table
+SELECT
+    id,
+    name,
+    secret_name,
+    age
+FROM
+    hero
+;

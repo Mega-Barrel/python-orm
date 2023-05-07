@@ -26,3 +26,19 @@ SELECT
 FROM
     hero
 ;
+
+-- Filter data
+SELECT
+    id,
+    name,
+    secret_name,
+    age
+FROM
+    hero
+WHERE
+    name = 'Deadpond'
+;
+
+-- Creating Index on table
+CREATE INDEX ix_hero_name
+ON hero (name);

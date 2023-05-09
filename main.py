@@ -85,11 +85,31 @@ def update_heros():
         print(f"Updated Hero_1: {hero_1}")
         print(f"Updated Hero_2: {hero_2}")
         
+def delete_heros():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == "Spider-Yongster")
+        results = session.exec(statement)
+        del_hero = results.one()
+        print(f"Hero: {del_hero}")
+        
+        session.delete(del_hero)
+        session.commit()
+        
+        print(f"Deleted Hero: {del_hero}")
+        
+        statement = select(Hero).where(Hero.name == "Spider-Yongster")
+        results = session.exec(statement)
+        del_hero = results.first()
+        
+        if del_hero is None:
+            print("There's no hero named Spider-Youngster")
+
 def main():
     create_db_and_tables()
     # create_heros()
     # select_heroes()
-    update_heros()
+    # update_heros()
+    delete_heros()
         
 if __name__ == "__main__":    
     main()

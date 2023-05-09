@@ -50,3 +50,12 @@ SET
     age = 16
 WHERE
     name = 'Spider-Boy'
+;
+
+-- Delete statement
+DELETE
+FROM 
+    hero
+WHERE
+    name = "Spider-Yongster"
+;

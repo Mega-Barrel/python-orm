@@ -57,11 +57,39 @@ def select_heroes():
         print(f"Heros: {heros}")
         # for result in results:
         #     print(result)
-    
+
+def update_heros():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == 'Spider-Boy')
+        results = session.exec(statement)
+        hero_1 = results.one()
+        print(f"Hero 1: {hero_1}")
+        
+        statement = select(Hero).where(Hero.name == "Captain North America")
+        results = session.exec(statement)
+        hero_2 = results.one()
+        print("Hero 2:", hero_2)
+        
+        hero_1.age = 21
+        hero_1.name = "Spider-Yongster"
+        session.add(hero_1)
+        
+        hero_2.name = "Captain North America Except Canada"
+        hero_2.age = 110
+        session.add(hero_2)
+        
+        session.commit()
+        session.refresh(hero_1)
+        session.refresh(hero_2)
+        
+        print(f"Updated Hero_1: {hero_1}")
+        print(f"Updated Hero_2: {hero_2}")
+        
 def main():
     create_db_and_tables()
     # create_heros()
-    select_heroes()
+    # select_heroes()
+    update_heros()
         
 if __name__ == "__main__":    
     main()

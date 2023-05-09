@@ -5,6 +5,15 @@ CREATE TABLE "hero" (
     "name" TEXT NOT NULL,
     "secret_name" TEXT NOT NULL,
     "age" INTEGER,
+    "team_id" INTEGER,
+    PRIMARY KEY ("id")
+    FOREIGN KEY(team_id) REFERENCES team(id)
+);
+
+CREATE TABLE "team" (
+    "id" INTEGER,
+    "name" TEXT NOT NULL,
+    "headquarters" TEXT NOT NULL,
     PRIMARY KEY ("id")
 );
 

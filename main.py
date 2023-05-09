@@ -50,14 +50,17 @@ def create_heros():
 def select_heroes():
     with Session(engine) as session:
         # statement = select(Hero).where(or_(col(Hero.age) <= 35, col(Hero.age) > 90))
-        statement = select(Hero).where(Hero.name == "Deadpond")
+        # hero = session.exec(select(Hero).where(Hero.name == 'Deadpond')).one()
+        statement = select(Hero).offset(6).limit(3)
         results = session.exec(statement)
-        for result in results:
-            print(result)
+        heros = results.all()
+        print(f"Heros: {heros}")
+        # for result in results:
+        #     print(result)
     
 def main():
     create_db_and_tables()
-    create_heros()
+    # create_heros()
     select_heroes()
         
 if __name__ == "__main__":    

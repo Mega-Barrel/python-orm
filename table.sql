@@ -42,3 +42,11 @@ WHERE
 -- Creating Index on table
 CREATE INDEX ix_hero_name
 ON hero (name);
+
+-- Update statement
+UPDATE 
+    hero
+SET 
+    age = 16
+WHERE
+    name = 'Spider-Boy'

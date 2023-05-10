@@ -61,10 +61,20 @@ def add_heros():
         print("Created hero:", hero_deadpond)
         print("Created hero:", hero_rusty_man)
         print("Created hero:", hero_spider_boy)
+        
+def select_heros():
+    with Session(engine) as session:
+        # statement = select(Hero, Team).where(Team.id == Hero.team_id)
+        statement = select(Hero, Team).join(Team).where(Team.name == "Preventers")
+        results = session.exec(statement=statement)
+        for hero in results:
+            print("Preventer Hero:", hero)
+            # print(f"Hero: {hero} | Team: {team}")
 
 def main():
     create_db_and_tables()
-    add_heros()
+    # add_heros()
+    select_heros()
 
 if __name__ == "__main__":    
     main()

@@ -68,3 +68,41 @@ FROM
 WHERE
     name = "Spider-Yongster"
 ;
+
+-- Read connected data
+SELECT
+    hero.id,
+    hero.name,
+    team.name
+FROM
+    hero,
+    team
+WHERE
+    hero.team_id = team.id
+;
+
+-- Alternate way of JOIN
+SELECT
+    hero.id,
+    hero.name,
+    team.name
+FROM
+    hero
+INNER JOIN
+    team
+ON
+    hero.team_id = team.id
+;
+
+-- LEFT JOIN
+SELECT
+    hero.id,
+    hero.name,
+    team.name
+FROM
+    hero
+LEFT OUTER JOIN
+    team
+ON
+    hero.team_id = team.id
+;

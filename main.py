@@ -30,6 +30,11 @@ class Hero(SQLModel, table=True):
     # foreign_key
     team_id: Optional[int] = Field(default=None, foreign_key='team.id')
     team: Optional[Team] = Relationship(back_populates='heroes')
+    
+    weapon_id: Optional[int] = Field(default=None, foreign_key="weapon.id")
+    # weapon: Optiona   l[Weapon] = Relationship(back_populates="hero")
+    
+    # powers: List[Power] = Relationship(back_populates="hero")
 
 # Create engine
 sqlite_file_name = "database.db"
@@ -108,10 +113,24 @@ def select_heros():
         
         print(f"Preventers: {team_preventers.heroes}")
 
+def update_heroes():
+    with Session(engine) as session:
+        statement = select(Hero).where(Hero.name == "Spider-Boy")
+        result = session.exec(statement)
+        hero_spider_boy = result.one()
+        
+        hero_spider_boy.team = None
+        session.add(hero_spider_boy)
+        session.commit()
+        
+        session.refresh(hero_spider_boy)
+        print(f"Spider-Boy without team: {hero_spider_boy}")
+
 def main():
     create_db_and_tables()
     # add_heros()
-    select_heros()
+    # select_heros()
+    update_heroes()
 
 if __name__ == "__main__":    
     main()
